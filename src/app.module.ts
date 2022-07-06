@@ -7,7 +7,10 @@ import { join } from 'path';
 
 import { TYPE_ORM_CONFIG } from './config/type-orm.config';
 import { HttpExceptionFilter } from './shared/exceptions/exception.handler';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './features/users/users.module';
+import { LocationsModule } from './features/locations/locations.module';
+import { BeerTypeModule } from './features/beer-type/beer-type.module';
+import { BeerDetailsModule } from './features/beer-details/beer-details.module';
 
 @Module({
   imports: [
@@ -17,6 +20,9 @@ import { UsersModule } from './users/users.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql')
     }),
     UsersModule,
+    LocationsModule,
+    BeerTypeModule,
+    BeerDetailsModule,
   ],
   controllers: [],
   providers: [

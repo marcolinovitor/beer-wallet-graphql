@@ -16,14 +16,37 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type BeerType {
+  id: Int!
+  description: String!
+}
+
+type BeerDetails {
+  id: Int!
+  rating: Float!
+  comments: String!
+  ibu: Int!
+  bitterness: Float!
+  beerType: BeerType!
+  location: Location!
+}
+
+type Location {
+  code: String!
+  description: String!
+  beerDetails: BeerDetails!
+}
+
 type Query {
   users: [User!]!
   user(id: Int!): User!
+  locations: [Location!]!
+  location(code: String!): Location!
+  beerTypes: [BeerType!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
 }
 
@@ -32,12 +55,4 @@ input CreateUserInput {
   email: String!
   password: String!
   confirmPassword: String!
-}
-
-input UpdateUserInput {
-  name: String
-  email: String
-  password: String
-  confirmPassword: String
-  id: Int!
 }
