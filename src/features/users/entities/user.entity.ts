@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Beer } from '../../beer/entities/beer.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 @ObjectType()
@@ -30,4 +31,8 @@ export class User {
   @CreateDateColumn({ name: 'created_at' })
   @Field(() => Date, { defaultValue: new Date() })
   createdAt: Date;
+
+  @OneToMany(() => Beer, (beer) => beer.id)
+  @Field(() => [Beer])
+  beers: Beer[];
 }

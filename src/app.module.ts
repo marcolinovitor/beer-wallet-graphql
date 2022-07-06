@@ -11,6 +11,7 @@ import { UsersModule } from './features/users/users.module';
 import { LocationsModule } from './features/locations/locations.module';
 import { BeerTypeModule } from './features/beer-type/beer-type.module';
 import { BeerDetailsModule } from './features/beer-details/beer-details.module';
+import { BeerModule } from './features/beer/beer.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BeerDetailsModule } from './features/beer-details/beer-details.module';
     LocationsModule,
     BeerTypeModule,
     BeerDetailsModule,
+    BeerModule,
   ],
   controllers: [],
   providers: [

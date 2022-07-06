@@ -15,6 +15,5 @@ export class Location {
     description: string;
 
     @OneToMany(() => BeerDetails, (beerDetails) => beerDetails.id)
-    @Field(() => BeerDetails)
     beerDetails: BeerDetails[];
 }

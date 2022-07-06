@@ -6,6 +6,7 @@ import { BeerDetails } from './entities/beer-details.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([BeerDetails])],
-  providers: [BeerDetailsResolver, BeerDetailsService]
+  providers: [BeerDetailsResolver, BeerDetailsService],
+  exports: [BeerDetailsService]
 })
 export class BeerDetailsModule {}
