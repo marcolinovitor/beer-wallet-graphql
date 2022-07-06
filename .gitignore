@@ -5,6 +5,7 @@
 # Files
 *.env
 .env
+*.sql
 
 # Logs
 logs
