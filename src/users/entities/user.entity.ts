@@ -16,8 +16,7 @@ export class User {
   @Field(() => String)
   email: string;
 
-  @Column('varchar', { nullable: false })
-  @Field(() => String)
+  @Column('varchar', { nullable: false, select: false })
   password: string;
 
   @Column('bool', { name: 'email_verified', default: false })

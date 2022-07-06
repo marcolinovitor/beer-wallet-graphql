@@ -1,6 +1,8 @@
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QueryFailedError, Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
@@ -13,12 +15,15 @@ export class UsersService {
     private readonly userRepository: Repository<User>
   ) { }
 
-  async create(createUserInput: CreateUserInput): Promise<User | BadRequestException> {
+  async create(createUserInput: CreateUserInput): Promise<User | BadRequestException | InternalServerErrorException> {
     const equalPasswords = createUserInput.password === createUserInput.confirmPassword;
     if (!equalPasswords) {
       throw new BadRequestException('Passwords does not match.');
     }
-    const user = this.userRepository.create(createUserInput);
+    
+    const hashPassword = bcrypt.hashSync(createUserInput.password, 10);
+    const user = this.userRepository.create({ ...createUserInput, password: hashPassword });
+    
     return this.userRepository.save(user)
       .catch(error => {
         if (error instanceof QueryFailedError) {
